@@ -4,7 +4,7 @@ const HOTSPOTS = document.getElementById('hotspots');
 const STAGE = document.getElementById('stage');
 const LOADING = document.getElementById('loading');
 const MENU_FINGERS = document.getElementById('menuFingerOverlays');
-const FINGER_ASSETS = ['assets/finger_tiger.webp?v=5','assets/finger_peacock.webp?v=5','assets/finger_koala.webp?v=5','assets/finger_owl.webp?v=5'];
+const FINGER_ASSETS = ['assets/finger_tiger.webp?v=14','assets/finger_peacock.webp?v=14','assets/finger_koala.webp?v=14','assets/finger_owl.webp?v=14'];
 const BGM = document.getElementById('bgm');
 const MUSIC = document.getElementById('musicControl');
 let audioReady = false;
@@ -12,7 +12,7 @@ let musicOn = false;
 
 const PAGES = {
   home:{
-    img:'assets/home.webp?v=5',
+    img:'assets/home.webp?v=14',
     alt:'DISC 增員攻心術首頁',
     spots:[
       {label:'進入 D 型老虎攻略',x:2.5,y:46.8,w:47.5,h:22.0,to:'tigerMenu'},
@@ -122,7 +122,7 @@ async function ensureMusic(autoplay=true){
   if(!BGM.src){
     BGM.volume = 0.45;
     BGM.preload = 'auto';
-    BGM.autoplay = false;
+    BGM.autoplay = true;
     BGM.src = MUSIC_SRC;
     BGM.load();
   }
@@ -154,12 +154,13 @@ MUSIC.addEventListener('click',async(e)=>{
   }
 });
 
-// 首頁一進來就顯示音符並嘗試自動播放；若瀏覽器擋有聲 autoplay，
-// 保留音符讓使用者點一下即可播放。
+// 首頁載入立即顯示音符並嘗試自動播放。
+// 注意：Chrome/手機瀏覽器若禁止「有聲自動播放」，瀏覽器本身會擋住 play()；
+// 此時第一次點擊頁面或音符即可立即補播。
 showMusicControl();
+BGM.autoplay = true;
 ensureMusic(true);
 
-// 若瀏覽器首次載入禁止有聲 autoplay，使用者第一次點擊頁面時立即補播。
 document.addEventListener('pointerdown',()=>{
   if(BGM.paused) ensureMusic(true);
 },{once:true,passive:true});
@@ -178,11 +179,12 @@ async function go(id, push=true){
     renderSpots(page);
 
     // 首頁四個角色手指：進入首頁時同時啟動縮放提示；離開首頁立即隱藏。
-    STAGE.classList.toggle('home-motion', id === 'home');
-    if(id === 'home') {
-      const homeFingers = STAGE.querySelectorAll('.finger');
-      homeFingers.forEach(el => el.getAnimations?.().forEach(a => a.cancel()));
+    // 首頁四隻手指完全同步縮放；用移除/重加 class + reflow 重啟 CSS 動畫，
+    // 不呼叫 cancelAnimations，避免瀏覽器留下被取消的動畫狀態。
+    STAGE.classList.remove('home-motion');
+    if(id === 'home'){
       void STAGE.offsetWidth;
+      STAGE.classList.add('home-motion');
     }
 
     const menuMatch = id.match(/^(tiger|peacock|koala|owl)Menu$/);
@@ -191,7 +193,7 @@ async function go(id, push=true){
       const animal = menuMatch[1];
       const fingers = MENU_FINGERS.querySelectorAll('.menu-finger');
       fingers.forEach((el, i) => {
-        el.src = `assets/menu_hand_clean_${i+1}.png?v=10`;
+        el.src = `assets/menu_hand_clean_${i+1}.png?v=14`;
       });
       // 強制重新啟動同一時間點的動畫，讓每次進入攻略頁都三個一起縮放。
       MENU_FINGERS.classList.remove('show');
