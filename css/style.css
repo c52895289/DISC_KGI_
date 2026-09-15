@@ -94,13 +94,19 @@ body{
   user-select:none;
   -webkit-user-drag:none;
 }
-.finger.tiger{left:41.0%;top:62.9%;width:4.7%;height:auto}
-.finger.peacock{left:87.0%;top:62.9%;width:4.7%;height:auto}
-.finger.koala{left:40.8%;top:85.8%;width:4.9%;height:auto}
-.finger.owl{left:87.0%;top:85.8%;width:4.7%;height:auto}
+.finger.tiger{left:37.50%;top:64.45%;width:7.52%;height:auto}
+.finger.peacock{left:83.79%;top:64.52%;width:7.62%;height:auto}
+.finger.koala{left:36.91%;top:87.11%;width:8.30%;height:auto}
+.finger.owl{left:83.79%;top:87.37%;width:7.62%;height:auto}
 @keyframes fingerPulseHome{
-  0%,100%{transform:scale(.96)}
-  50%{transform:scale(1.04)}
+  0%,100%{
+    transform:scale(.84);
+    filter:drop-shadow(0 2px 2px rgba(0,0,0,.18));
+  }
+  50%{
+    transform:scale(1.16);
+    filter:drop-shadow(0 4px 5px rgba(0,0,0,.32));
+  }
 }
 
 /* 動物攻略選單頁：只顯示「手指」本體。

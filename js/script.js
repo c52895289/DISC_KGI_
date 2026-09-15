@@ -4,7 +4,7 @@ const HOTSPOTS = document.getElementById('hotspots');
 const STAGE = document.getElementById('stage');
 const LOADING = document.getElementById('loading');
 const MENU_FINGERS = document.getElementById('menuFingerOverlays');
-const FINGER_ASSETS = ['assets/finger_tiger.webp?v=12','assets/finger_peacock.webp?v=12','assets/finger_koala.webp?v=12','assets/finger_owl.webp?v=12'];
+const FINGER_ASSETS = ['assets/finger_tiger.webp?v=13','assets/finger_peacock.webp?v=13','assets/finger_koala.webp?v=13','assets/finger_owl.webp?v=13'];
 const BGM = document.getElementById('bgm');
 const MUSIC = document.getElementById('musicControl');
 let audioReady = false;
@@ -12,7 +12,7 @@ let musicOn = false;
 
 const PAGES = {
   home:{
-    img:'assets/home.webp?v=12',
+    img:'assets/home.webp?v=13',
     alt:'DISC 增員攻心術首頁',
     spots:[
       {label:'進入 D 型老虎攻略',x:2.5,y:46.8,w:47.5,h:22.0,to:'tigerMenu'},
@@ -193,7 +193,7 @@ async function go(id, push=true){
       const animal = menuMatch[1];
       const fingers = MENU_FINGERS.querySelectorAll('.menu-finger');
       fingers.forEach((el, i) => {
-        el.src = `assets/menu_hand_clean_${i+1}.png?v=12`;
+        el.src = `assets/menu_hand_clean_${i+1}.png?v=13`;
       });
       // 強制重新啟動同一時間點的動畫，讓每次進入攻略頁都三個一起縮放。
       MENU_FINGERS.classList.remove('show');
