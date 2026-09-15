@@ -4,7 +4,7 @@ const HOTSPOTS = document.getElementById('hotspots');
 const STAGE = document.getElementById('stage');
 const LOADING = document.getElementById('loading');
 const MENU_FINGERS = document.getElementById('menuFingerOverlays');
-const FINGER_ASSETS = ['assets/finger_tiger.webp?v=8','assets/finger_peacock.webp?v=8','assets/finger_koala.webp?v=8','assets/finger_owl.webp?v=8'];
+const FINGER_ASSETS = ['assets/finger_tiger.webp?v=5','assets/finger_peacock.webp?v=5','assets/finger_koala.webp?v=5','assets/finger_owl.webp?v=5'];
 const BGM = document.getElementById('bgm');
 const MUSIC = document.getElementById('musicControl');
 let audioReady = false;
@@ -12,7 +12,7 @@ let musicOn = false;
 
 const PAGES = {
   home:{
-    img:'assets/home.webp?v=6',
+    img:'assets/home.webp?v=5',
     alt:'DISC 增員攻心術首頁',
     spots:[
       {label:'進入 D 型老虎攻略',x:2.5,y:46.8,w:47.5,h:22.0,to:'tigerMenu'},
@@ -178,12 +178,11 @@ async function go(id, push=true){
     renderSpots(page);
 
     // 首頁四個角色手指：進入首頁時同時啟動縮放提示；離開首頁立即隱藏。
-    // 首頁四隻手指完全同步縮放；用移除/重加 class + reflow 重啟 CSS 動畫，
-    // 不呼叫 cancelAnimations，避免瀏覽器留下被取消的動畫狀態。
-    STAGE.classList.remove('home-motion');
-    if(id === 'home'){
+    STAGE.classList.toggle('home-motion', id === 'home');
+    if(id === 'home') {
+      const homeFingers = STAGE.querySelectorAll('.finger');
+      homeFingers.forEach(el => el.getAnimations?.().forEach(a => a.cancel()));
       void STAGE.offsetWidth;
-      STAGE.classList.add('home-motion');
     }
 
     const menuMatch = id.match(/^(tiger|peacock|koala|owl)Menu$/);
