@@ -82,6 +82,7 @@ body{
   display:block !important;
   object-fit:contain;
   height:auto;
+  max-width:none;
   margin:0;
   padding:0;
   border:0;
@@ -98,8 +99,8 @@ body{
 .finger.koala{left:36.91%;top:87.11%;width:8.30%;height:auto}
 .finger.owl{left:83.79%;top:87.37%;width:7.62%;height:auto}
 @keyframes fingerPulseHome{
-  0%,100%{transform:scale(.94);filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}
-  50%{transform:scale(1.06);filter:drop-shadow(0 3px 3px rgba(0,0,0,.24))}
+  0%,100%{transform:scale(.92);filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}
+  50%{transform:scale(1.08);filter:drop-shadow(0 3px 4px rgba(0,0,0,.28))}
 }
 
 /* 動物攻略選單頁：只顯示「手指」本體。
@@ -275,16 +276,3 @@ body{
   .hotspot{transition:none}
 }
 
-/* iPhone / iPad：手指以 2:3 stage 比例定位與縮放，維持在角色框內 */
-@media (max-width: 1024px){
-  .stage.home-motion .finger.tiger{left:43.0%;top:64.0%;width:3.2%;height:auto}
-  .stage.home-motion .finger.peacock{left:88.5%;top:64.0%;width:3.2%;height:auto}
-  .stage.home-motion .finger.koala{left:42.8%;top:86.7%;width:3.25%;height:auto}
-  .stage.home-motion .finger.owl{left:88.5%;top:86.7%;width:3.2%;height:auto}
-}
-@media (max-width: 600px){
-  .stage.home-motion .finger.tiger{left:43.2%;top:64.1%;width:2.75%;height:auto}
-  .stage.home-motion .finger.peacock{left:88.8%;top:64.1%;width:2.75%;height:auto}
-  .stage.home-motion .finger.koala{left:43.0%;top:86.8%;width:2.8%;height:auto}
-  .stage.home-motion .finger.owl{left:88.8%;top:86.8%;width:2.75%;height:auto}
-}
